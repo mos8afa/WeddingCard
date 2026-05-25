@@ -1,0 +1,107 @@
+﻿═══════════════════════════════════════════════════════════════
+✅ تم إصلاح مشكلة الحروف المقطوعة بنجاح!
+═══════════════════════════════════════════════════════════════
+
+📋 التعديلات الرئيسية:
+─────────────────────────────────────────────────────────────
+
+1. ✓ تحسين line-height:
+   • العناوين الكبيرة: من 1.0-1.1 إلى 1.4
+   • النصوص العادية: من 1.4 إلى 1.6
+   • النصوص العربية: من 1.6 إلى 1.8-2.2
+   • علامات الاقتباس: من 0.5 إلى 1.0
+
+2. ✓ إزالة overflow: hidden:
+   • تم تغيير جميع overflow: hidden إلى overflow: visible
+   • تم إضافة !important للعناصر الحرجة
+   • تم إصلاح .countdown-card و .detail-card
+
+3. ✓ إضافة padding كافي:
+   • padding: 4px 0 للنصوص الصغيرة
+   • padding: 8px 0 للعناوين الكبيرة
+   • تم تطبيقه على جميع العناصر النصية
+
+4. ✓ استخدام min-height بدلاً من height:
+   • min-height: fit-content للحاويات
+   • إزالة أي height ثابتة قد تقص النص
+
+5. ✓ تحسين الخطوط:
+   • إضافة text-rendering: optimizeLegibility
+   • إضافة -webkit-font-smoothing: antialiased
+   • إضافة -moz-osx-font-smoothing: grayscale
+   • font-display: swap موجود بالفعل في Google Fonts
+
+6. ✓ قواعد CSS عامة:
+   • قاعدة عامة لجميع h1-h6, p, span, div
+   • قواعد خاصة للنصوص العربية [dir="rtl"]
+   • قواعد خاصة للخطوط المزخرفة (script fonts)
+
+═══════════════════════════════════════════════════════════════
+🎨 العناصر المُصلحة:
+═══════════════════════════════════════════════════════════════
+
+✓ body - line-height: 1.6
+✓ .section-title - line-height: 1.4, padding: 8px 0
+✓ .hero-names - line-height: 1.4, padding: 8px 0
+✓ .inv-names - line-height: 1.4, padding: 8px 0
+✓ .inv-full-names - line-height: 1.4, padding: 8px 0
+✓ .countdown-num - line-height: 1.3, padding: 4px 0
+✓ .countdown-card - overflow: visible
+✓ .countdown-colon - line-height: 1.3
+✓ .timeline-event - line-height: 1.5, padding: 4px 0
+✓ .timeline-content - overflow: visible, min-height: fit-content
+✓ .quote-marks - line-height: 1.0
+✓ .quote-text - line-height: 1.5, padding: 8px 0
+✓ .ty-title - line-height: 1.3, padding: 8px 0
+✓ .ty-names - line-height: 1.4, padding: 4px 0
+✓ .detail-card - overflow: visible
+✓ .detail-value - line-height: 1.6, padding: 2px 0
+✓ .detail-value-arabic - line-height: 1.8, padding: 4px 0
+✓ .detail-directions - line-height: 2.2, padding: 8px 0
+✓ .inv-full-card - overflow: visible, min-height: fit-content
+✓ .loader-monogram - line-height: 1.3, padding: 8px 0
+
+═══════════════════════════════════════════════════════════════
+📱 تحسينات Responsive:
+═══════════════════════════════════════════════════════════════
+
+✓ Tablet (768px):
+  • overflow: visible !important لجميع العناصر
+  • line-height محسّن للعناوين
+  • overflow: visible للبطاقات
+
+✓ Mobile (640px):
+  • Timeline: overflow: visible للمحتوى
+  • padding: 2px 0 لجميع النصوص
+
+✓ Small Mobile (480px):
+  • overflow: visible !important لجميع h1-h6, p, span, div
+  • line-height محسّن لجميع العناصر
+
+═══════════════════════════════════════════════════════════════
+💡 نصائح للاختبار:
+═══════════════════════════════════════════════════════════════
+
+1. اختبر على متصفحات مختلفة:
+   • Chrome / Edge
+   • Firefox
+   • Safari (إذا كان متاحاً)
+
+2. اختبر على أحجام شاشات مختلفة:
+   • Desktop (1920px+)
+   • Laptop (1366px)
+   • Tablet (768px)
+   • Mobile (375px, 414px)
+
+3. انتبه بشكل خاص إلى:
+   • النصوص العربية (خط Scheherazade New)
+   • العناوين الكبيرة (خط Great Vibes)
+   • عداد الوقت (الأرقام الكبيرة)
+   • بطاقات التفاصيل
+
+4. إذا لاحظت أي مشكلة متبقية:
+   • افتح Developer Tools (F12)
+   • افحص العنصر المقطوع
+   • تحقق من line-height و overflow و padding
+
+═══════════════════════════════════════════════════════════════

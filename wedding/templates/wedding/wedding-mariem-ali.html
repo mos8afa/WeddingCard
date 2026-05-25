@@ -63,9 +63,107 @@ body {
   color: var(--text-dark);
   overflow-x: hidden;
   cursor: default;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection { background: var(--rg-pale); color: var(--rg-deep); }
+
+/* Global text overflow fix */
+h1, h2, h3, h4, h5, h6, p, span {
+  overflow: visible;
+  min-height: fit-content;
+}
+
+/* Specific fix for text elements only - NOT divs */
+.section-tag,
+.section-title,
+.section-sub,
+.hero-names,
+.inv-names,
+.inv-full-names,
+.countdown-num,
+.timeline-event,
+.quote-text,
+.ty-title,
+.ty-names,
+.inv-full-arabic,
+.detail-value,
+.detail-value-arabic,
+.detail-directions,
+.timeline-date,
+.timeline-year,
+.inv-tagline,
+.inv-full-date,
+.inv-full-time,
+.ty-body,
+.hero-quote,
+.quote-attr {
+  overflow: visible !important;
+  min-height: fit-content;
+}
+
+/* Ensure all text elements have proper line-height */
+.section-tag,
+.section-title,
+.section-sub,
+.hero-names,
+.inv-names,
+.inv-full-names,
+.countdown-num,
+.timeline-event,
+.quote-text,
+.ty-title,
+.ty-names {
+  overflow: visible !important;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/* Fix for Arabic text */
+[dir="rtl"],
+.detail-value-arabic,
+.detail-directions,
+.inv-full-arabic[dir="rtl"],
+.timeline-event[dir="rtl"] {
+  line-height: 1.8 !important;
+  padding: 4px 0 !important;
+  overflow: visible !important;
+}
+
+/* Fix for script fonts (cursive) */
+.inv-names,
+.inv-full-names,
+.hero-names,
+.section-title,
+.quote-text,
+.ty-title,
+.ty-names,
+.timeline-event,
+.loader-monogram {
+  line-height: 1.4 !important;
+  padding: 8px 0 !important;
+  overflow: visible !important;
+  display: block;
+}
+
+/* Fix for cards and containers - but NOT envelope elements */
+.countdown-card,
+.detail-card,
+.timeline-content,
+.inv-full-card {
+  overflow: visible !important;
+  min-height: fit-content !important;
+}
+
+/* Ensure proper spacing for all text */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
 
 /* ============================================
    CUSTOM CURSOR
@@ -116,6 +214,9 @@ body {
   background-clip: text;
   animation: shimmerText 2s linear infinite;
   background-size: 200% 100%;
+  line-height: 1.3;
+  padding: 8px 0;
+  overflow: visible;
 }
 @keyframes shimmerText {
   0%   { background-position: -200% center; }
@@ -148,6 +249,9 @@ body {
   text-transform: uppercase;
   color: var(--text-light);
   animation: fadeInOut 1.4s ease infinite;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 @keyframes fadeInOut {
   0%, 100% { opacity: 0.4; }
@@ -313,7 +417,7 @@ body {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 50%;
-  overflow: hidden;
+  overflow: hidden !important;
   border-radius: 0 0 3px 3px;
 }
 .env-bottom::before {
@@ -335,7 +439,7 @@ body {
   position: absolute;
   top: 0; bottom: 0;
   width: 50%;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 .env-left { left: 0; }
 .env-right { right: 0; }
@@ -376,7 +480,7 @@ body {
 .env-flap-front {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  overflow: hidden !important;
   backface-visibility: visible;
 }
 .env-flap-front::before {
@@ -468,6 +572,9 @@ body {
   text-transform: uppercase;
   color: var(--rg-gold);
   font-weight: 400;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 
 .inv-names {
@@ -477,7 +584,9 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.1;
+  line-height: 1.4;
+  padding: 8px 0;
+  overflow: visible;
 }
 
 .inv-amp {
@@ -487,6 +596,8 @@ body {
   font-style: italic;
   display: inline-block;
   margin: 0 10px;
+  line-height: 1.4;
+  overflow: visible;
 }
 
 .inv-divider {
@@ -504,6 +615,9 @@ body {
   text-transform: uppercase;
   color: var(--text-mid);
   font-weight: 300;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 
 /* Particle canvas */
@@ -621,6 +735,9 @@ body {
   color: var(--rg-gold);
   display: block;
   margin-bottom: 12px;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 .section-title {
   font-family: var(--font-script);
@@ -629,7 +746,9 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.1;
+  line-height: 1.4;
+  padding: 8px 0;
+  overflow: visible;
 }
 .section-sub {
   font-family: var(--font-serif);
@@ -637,6 +756,9 @@ body {
   color: var(--text-mid);
   font-style: italic;
   margin-top: 8px;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 .ornament {
   display: flex;
@@ -674,6 +796,8 @@ body {
   position: relative;
   box-shadow: var(--shadow-card), 0 1px 0 rgba(212,165,116,0.3);
   border: 1px solid rgba(212,165,116,0.2);
+  min-height: fit-content;
+  overflow: visible;
 }
 .inv-full-card::before, .inv-full-card::after {
   content: '';
@@ -693,6 +817,9 @@ body {
   letter-spacing: 3px;
   text-transform: uppercase;
   font-style: italic;
+  line-height: 1.6;
+  padding: 4px 0;
+  overflow: visible;
 }
 .inv-full-arabic[dir="rtl"] {
   font-family: var(--font-arabic);
@@ -701,15 +828,20 @@ body {
   text-transform: none;
   font-style: normal;
   direction: rtl;
+  line-height: 1.8;
+  padding: 4px 0;
+  overflow: visible;
 }
 .inv-full-names {
   font-family: var(--font-script);
   font-size: clamp(48px, 10vw, 86px);
-  line-height: 1;
+  line-height: 1.4;
   background: var(--grad-gold);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  padding: 8px 0;
+  overflow: visible;
 }
 .inv-full-amp {
   font-family: var(--font-serif);
@@ -718,6 +850,9 @@ body {
   font-style: italic;
   display: block;
   margin: 6px 0;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 .inv-tagline {
   font-family: var(--font-serif);
@@ -725,6 +860,9 @@ body {
   color: var(--text-mid);
   font-style: italic;
   margin: 16px 0;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 .inv-full-date {
   font-family: var(--font-sans);
@@ -734,6 +872,9 @@ body {
   color: var(--rg-core);
   font-weight: 400;
   margin: 8px 0 4px;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 .inv-full-time {
   font-family: var(--font-sans);
@@ -742,6 +883,9 @@ body {
   text-transform: uppercase;
   color: var(--text-light);
   font-weight: 300;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 
 /* ============================================
@@ -806,6 +950,8 @@ body {
   padding: clamp(30px, 5vw, 60px);
   max-width: 480px;
   text-align: center;
+  overflow: visible;
+  min-height: fit-content;
 }
 
 .hero-names {
@@ -815,9 +961,11 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.05;
+  line-height: 1.4;
   animation: shimmerText 3s linear infinite;
   background-size: 200% 100%;
+  padding: 8px 0;
+  overflow: visible;
 }
 
 .hero-quote {
@@ -880,7 +1028,7 @@ body {
   box-shadow: var(--shadow-card);
   border: 1px solid rgba(212,165,116,0.2);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   transition: transform 0.4s var(--ease-bounce), box-shadow 0.4s;
 }
 .countdown-card:hover {
@@ -903,9 +1051,11 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1;
+  line-height: 1.3;
   display: block;
   transition: transform 0.3s var(--ease-bounce);
+  padding: 4px 0;
+  overflow: visible;
 }
 .countdown-num.flip { animation: flipNum 0.3s var(--ease-bounce); }
 @keyframes flipNum {
@@ -921,6 +1071,9 @@ body {
   color: var(--text-light);
   margin-top: 8px;
   font-weight: 400;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 
 .countdown-colon {
@@ -928,10 +1081,11 @@ body {
   font-size: clamp(36px, 8vw, 72px);
   font-weight: 300;
   color: var(--rg-gold);
-  line-height: 1;
+  line-height: 1.3;
   padding-top: clamp(20px, 4vw, 40px);
   animation: colonBlink 1s ease infinite;
   align-self: flex-start;
+  overflow: visible;
 }
 @keyframes colonBlink {
   0%, 100% { opacity: 1; }
@@ -1005,6 +1159,8 @@ body {
   box-shadow: var(--shadow-soft);
   border: 1px solid rgba(212,165,116,0.15);
   transition: transform 0.3s, box-shadow 0.3s;
+  min-height: fit-content;
+  overflow: visible;
 }
 .timeline-content:hover {
   transform: translateY(-4px);
@@ -1048,6 +1204,16 @@ body {
     margin-left: 0;
     padding: 18px 16px;
     border-radius: 10px;
+    overflow: visible;
+    min-height: fit-content;
+  }
+  
+  /* Ensure text is not cut off */
+  .timeline-event,
+  .timeline-date,
+  .timeline-year {
+    overflow: visible !important;
+    padding: 2px 0;
   }
 }
 
@@ -1059,26 +1225,36 @@ body {
   color: var(--rg-gold);
   margin-bottom: 8px;
   font-weight: 400;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 .timeline-event {
   font-family: var(--font-script);
   font-size: clamp(22px, 4vw, 32px);
   color: var(--rg-deep);
-  line-height: 1.2;
+  line-height: 1.5;
   margin-bottom: 12px;
+  padding: 4px 0;
+  overflow: visible;
 }
 .timeline-event[dir="rtl"] {
   font-family: var(--font-arabic);
   direction: rtl;
   font-weight: 600;
+  line-height: 1.8;
+  padding: 4px 0;
+  overflow: visible;
 }
 .timeline-date {
   font-family: var(--font-serif);
   font-size: clamp(16px, 2.5vw, 20px);
   color: var(--rg-core);
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.6;
   letter-spacing: 1px;
+  padding: 2px 0;
+  overflow: visible;
 }
 
 /* ============================================
@@ -1105,10 +1281,11 @@ body {
   font-family: var(--font-serif);
   font-size: clamp(60px, 15vw, 140px);
   color: var(--rg-pale);
-  line-height: 0.5;
+  line-height: 1;
   display: block;
   margin-bottom: 20px;
   font-weight: 300;
+  overflow: visible;
 }
 
 .quote-text {
@@ -1118,9 +1295,11 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.35;
+  line-height: 1.5;
   max-width: 800px;
   margin: 0 auto;
+  padding: 8px 0;
+  overflow: visible;
 }
 
 .quote-attr {
@@ -1130,6 +1309,9 @@ body {
   font-style: italic;
   margin-top: 28px;
   letter-spacing: 1px;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 
 /* ============================================
@@ -1166,6 +1348,7 @@ body {
   transition-property: opacity, transform, box-shadow;
   transition-duration: 0.6s, 0.6s, 0.3s;
   transition-timing-function: var(--ease-luxury);
+  overflow: visible;
 }
 .detail-card.visible { opacity: 1; transform: translateY(0); }
 .detail-card:hover {
@@ -1202,39 +1385,53 @@ body {
   color: var(--rg-gold);
   font-weight: 400;
   margin-bottom: 8px;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 .detail-value {
   font-family: var(--font-serif);
   font-size: clamp(16px, 2.5vw, 20px);
   color: var(--text-dark);
-  line-height: 1.4;
+  line-height: 1.6;
   margin-bottom: 4px;
+  padding: 2px 0;
+  overflow: visible;
 }
 .detail-value-arabic {
   font-family: var(--font-arabic);
   direction: rtl;
   font-size: clamp(16px, 2.5vw, 19px);
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.8;
+  padding: 4px 0;
+  overflow: visible;
 }
 .detail-sub {
   font-family: var(--font-serif);
   font-size: 13px;
   color: var(--text-light);
   font-style: italic;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 
 .detail-directions {
   font-family: var(--font-arabic);
   font-size: clamp(15px, 2.2vw, 18px);
   color: var(--text-dark);
-  line-height: 2;
+  line-height: 2.2;
   margin-top: 16px;
   text-align: center;
   direction: rtl;
+  padding: 8px 0;
+  overflow: visible;
 }
 .detail-directions p {
   margin-bottom: 12px;
+  padding: 4px 0;
+  overflow: visible;
 }
 
 .maps-btn {
@@ -1253,6 +1450,8 @@ body {
   text-decoration: none;
   transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s;
   box-shadow: 0 6px 20px rgba(201,137,106,0.3);
+  line-height: 1.6;
+  overflow: visible;
 }
 .maps-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
 
@@ -1328,6 +1527,9 @@ body {
   display: block;
   margin-bottom: 16px;
   opacity: 0.7;
+  line-height: 1.6;
+  padding: 2px 0;
+  overflow: visible;
 }
 .ty-title {
   font-family: var(--font-script);
@@ -1336,18 +1538,22 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1;
+  line-height: 1.3;
   animation: shimmerText 3s linear infinite;
   background-size: 200% 100%;
+  padding: 8px 0;
+  overflow: visible;
 }
 .ty-body {
   font-family: var(--font-serif);
   font-size: clamp(16px, 3vw, 22px);
   color: var(--text-mid);
   font-style: italic;
-  line-height: 1.7;
+  line-height: 1.8;
   max-width: 500px;
   margin: 20px auto;
+  padding: 4px 0;
+  overflow: visible;
 }
 .ty-names {
   font-family: var(--font-script);
@@ -1355,6 +1561,9 @@ body {
   color: var(--rg-deep);
   margin-top: 16px;
   opacity: 0.85;
+  line-height: 1.4;
+  padding: 4px 0;
+  overflow: visible;
 }
 
 .footer-note {
@@ -1368,6 +1577,8 @@ body {
   background: var(--cream);
   position: relative;
   z-index: 2;
+  line-height: 1.6;
+  overflow: visible;
 }
 
 /* ============================================
@@ -1451,15 +1662,15 @@ body {
 @media (max-width: 768px) {
   .hero-layout { flex-direction: column; gap: 30px; padding: 30px 16px; }
   .hero-image-frame { width: clamp(220px, 72vw, 340px); }
-  .hero-content { padding: 20px 16px; }
+  .hero-content { padding: 20px 16px; overflow: visible; }
 
   #invitation-section { padding: 50px 16px; }
-  .inv-full-card { padding: 36px 20px; }
+  .inv-full-card { padding: 36px 20px; overflow: visible; }
 
   #countdown-section { padding: 60px 16px; }
   .countdown-grid { gap: 8px; }
-  .countdown-card { min-width: clamp(60px, 18vw, 100px); padding: 16px 10px; }
-  .countdown-colon { font-size: clamp(28px, 7vw, 48px); padding-top: 16px; }
+  .countdown-card { min-width: clamp(60px, 18vw, 100px); padding: 16px 10px; overflow: visible; }
+  .countdown-colon { font-size: clamp(28px, 7vw, 48px); padding-top: 16px; line-height: 1.3; }
 
   #story-section { padding: 60px 16px; }
   .story-inner { max-width: 100%; }
@@ -1477,41 +1688,51 @@ body {
 
   #thankyou-section { padding: 70px 16px; }
 
-  .section-title { font-size: clamp(34px, 9vw, 60px); }
-  .section-sub   { font-size: clamp(13px, 3vw, 17px); }
+  .section-title { font-size: clamp(34px, 9vw, 60px); line-height: 1.4; padding: 8px 0; }
+  .section-sub   { font-size: clamp(13px, 3vw, 17px); line-height: 1.6; }
+  
+  /* Ensure all text is visible - but NOT envelope divs */
+  h1, h2, h3, h4, h5, h6, p, span {
+    overflow: visible !important;
+  }
 }
 
 /* --- Small mobile (480px) --- */
 @media (max-width: 480px) {
   /* Hero */
   .hero-image-frame { width: min(80vw, 260px); }
-  .hero-quote { font-size: 14px; }
+  .hero-quote { font-size: 14px; line-height: 1.6; }
 
   /* Countdown */
-  .countdown-card { min-width: 64px; padding: 14px 8px; border-radius: 12px; }
-  .countdown-num  { font-size: clamp(28px, 8vw, 44px); }
-  .countdown-label { font-size: 8px; letter-spacing: 2px; }
-  .countdown-colon { font-size: clamp(26px, 8vw, 40px); padding-top: 14px; }
+  .countdown-card { min-width: 64px; padding: 14px 8px; border-radius: 12px; overflow: visible; }
+  .countdown-num  { font-size: clamp(28px, 8vw, 44px); line-height: 1.3; padding: 4px 0; }
+  .countdown-label { font-size: 8px; letter-spacing: 2px; line-height: 1.6; }
+  .countdown-colon { font-size: clamp(26px, 8vw, 40px); padding-top: 14px; line-height: 1.3; }
 
   /* Our Story */
   #story-section { padding: 50px 12px; }
   .timeline { margin-top: 32px; }
-  .timeline-content { padding: 14px 12px; }
-  .timeline-year  { font-size: 8px; letter-spacing: 3px; }
-  .timeline-event { font-size: clamp(18px, 5vw, 24px); margin-bottom: 6px; }
-  .timeline-date  { font-size: clamp(14px, 4vw, 17px); }
+  .timeline-content { padding: 14px 12px; overflow: visible; }
+  .timeline-year  { font-size: 8px; letter-spacing: 3px; line-height: 1.6; }
+  .timeline-event { font-size: clamp(18px, 5vw, 24px); margin-bottom: 6px; line-height: 1.5; padding: 4px 0; }
+  .timeline-date  { font-size: clamp(14px, 4vw, 17px); line-height: 1.6; }
 
   /* Gallery */
   .gallery-grid { gap: 8px; }
 
   /* Quote */
-  .quote-text { font-size: clamp(22px, 7vw, 36px); }
+  .quote-text { font-size: clamp(22px, 7vw, 36px); line-height: 1.5; padding: 8px 0; }
 
   /* Details cards */
-  .detail-card { padding: 28px 18px; border-radius: 16px; }
+  .detail-card { padding: 28px 18px; border-radius: 16px; overflow: visible; }
 
   /* Footer */
-  .footer-note { font-size: 11px; padding: 20px 16px; }
+  .footer-note { font-size: 11px; padding: 20px 16px; line-height: 1.6; }
+  
+  /* All text elements - but NOT envelope divs */
+  h1, h2, h3, h4, h5, h6, p, span {
+    overflow: visible !important;
+  }
 }
 </style>
 </head>
