@@ -167,10 +167,447 @@ body {
 
 
 /* ============================================
-   SECTION: ENVELOPE (HIDDEN)
+   SECTION: CINEMATIC ENVELOPE INTRO
    ============================================ */
 #envelope-section {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 40%, #fff5f0 0%, #f5e6dc 40%, #e8d0c0 100%);
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
+}
+#envelope-section.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Ambient light rays */
+.light-rays {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ray {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  width: 2px;
+  height: 80%;
+  transform-origin: top center;
+  opacity: 0;
+  animation: rayFade 6s ease-in-out infinite;
+}
+.ray:nth-child(1) { transform: rotate(-30deg); background: linear-gradient(to bottom, rgba(212,168,130,0.25), transparent); animation-delay: 0s; }
+.ray:nth-child(2) { transform: rotate(-15deg); background: linear-gradient(to bottom, rgba(220,175,140,0.18), transparent); animation-delay: 0.8s; }
+.ray:nth-child(3) { transform: rotate(0deg);   background: linear-gradient(to bottom, rgba(230,185,150,0.22), transparent); animation-delay: 0.4s; }
+.ray:nth-child(4) { transform: rotate(15deg);  background: linear-gradient(to bottom, rgba(215,170,135,0.18), transparent); animation-delay: 1.2s; }
+.ray:nth-child(5) { transform: rotate(30deg);  background: linear-gradient(to bottom, rgba(210,165,128,0.2),  transparent); animation-delay: 0.2s; }
+@keyframes rayFade {
+  0%,100% { opacity: 0; }
+  40%,60%  { opacity: 1; }
+}
+
+/* Floral corner decorations */
+.floral-corner {
+  position: absolute;
+  width: clamp(120px, 20vw, 200px);
+  height: clamp(120px, 20vw, 200px);
+  opacity: 0.2;
+  pointer-events: none;
+}
+.floral-corner.tl { top: 0; left: 0; }
+.floral-corner.tr { top: 0; right: 0; transform: scaleX(-1); }
+.floral-corner.bl { bottom: 0; left: 0; transform: scaleY(-1); }
+.floral-corner.br { bottom: 0; right: 0; transform: scale(-1); }
+
+/* Background pattern */
+.envelope-bg-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Scene wrapper (cinematic camera) */
+.scene {
+  perspective: 1200px;
+  perspective-origin: 50% 40%;
+  transform: scale(0.78);
+  animation: cameraZoom 1.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.4s forwards;
+}
+@keyframes cameraZoom {
+  to { transform: scale(1); }
+}
+
+/* Envelope wrapper */
+.envelope-wrapper {
+  position: relative;
+  width: clamp(320px, 55vw, 520px);
+  aspect-ratio: 1.618;
+  transform-style: preserve-3d;
+  animation: floatIdle 5s ease-in-out 2.2s infinite;
+  z-index: 1;
+}
+@keyframes floatIdle {
+  0%,100% { transform: translateY(0) rotateY(0deg) rotateX(0deg); }
+  30%      { transform: translateY(-6px) rotateY(1.5deg) rotateX(0.8deg); }
+  70%      { transform: translateY(4px) rotateY(-1deg) rotateX(-0.5deg); }
+}
+
+/* Envelope body */
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(180,140,110,0.03) 2px, rgba(180,140,110,0.03) 4px),
+    linear-gradient(155deg, #fdfaf6 0%, #f7ede0 30%, #f0ddc8 60%, #e8d0b8 100%);
+  box-shadow:
+    0 40px 80px -10px rgba(100, 60, 30, 0.35),
+    0 20px 40px -8px rgba(120, 70, 40, 0.25),
+    inset 0 1px 0 rgba(220,185,155,0.8),
+    inset 0 -1px 0 rgba(160,110,70,0.3),
+    inset -1px 0 0 rgba(160,110,70,0.2),
+    inset 1px 0 0 rgba(230,200,165,0.6);
+  transform-style: preserve-3d;
+  transform: translateZ(0px);
+}
+
+/* Diagonal fold lines */
+.envelope-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, transparent 48%, rgba(160,110,80,0.06) 49%, rgba(160,110,80,0.06) 50%, transparent 51%),
+    linear-gradient(45deg, transparent 48%, rgba(160,110,80,0.05) 49%, rgba(160,110,80,0.05) 50%, transparent 51%);
+  border-radius: 3px;
+}
+
+/* Rose gold border frame */
+.env-border {
+  position: absolute;
+  inset: 6px;
+  border: 1.5px solid;
+  border-color: rgba(198,154,102,0.5) rgba(178,130,80,0.35) rgba(178,130,80,0.4) rgba(198,154,102,0.5);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.env-border::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 0.5px solid rgba(198,154,102,0.25);
+  border-radius: 1px;
+}
+
+/* Bottom triangle fold */
+.env-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 50%;
+  overflow: hidden;
+  border-radius: 0 0 3px 3px;
+}
+.env-bottom::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: calc(clamp(320px, 55vw, 520px) / 2 + 2px) solid transparent;
+  border-right: calc(clamp(320px, 55vw, 520px) / 2 + 2px) solid transparent;
+  border-bottom: calc(clamp(320px, 55vw, 520px) * 0.35) solid rgba(224,188,148,0.9);
+  filter: drop-shadow(0 -2px 4px rgba(140,90,50,0.15));
+}
+
+/* Side triangle folds */
+.env-left, .env-right {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 50%;
+  overflow: hidden;
+}
+.env-left { left: 0; }
+.env-right { right: 0; }
+
+.env-left::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 0;
+  transform: translateY(-50%);
+  width: 0; height: 0;
+  border-top: calc(clamp(320px, 55vw, 520px) * 0.31 + 4px) solid transparent;
+  border-bottom: calc(clamp(320px, 55vw, 520px) * 0.31 + 4px) solid transparent;
+  border-left: calc(clamp(320px, 55vw, 520px) * 0.5) solid rgba(218,182,140,0.85);
+}
+.env-right::before {
+  content: '';
+  position: absolute;
+  top: 50%; right: 0;
+  transform: translateY(-50%);
+  width: 0; height: 0;
+  border-top: calc(clamp(320px, 55vw, 520px) * 0.31 + 4px) solid transparent;
+  border-bottom: calc(clamp(320px, 55vw, 520px) * 0.31 + 4px) solid transparent;
+  border-right: calc(clamp(320px, 55vw, 520px) * 0.5) solid rgba(218,182,140,0.85);
+}
+
+/* Top flap (3D hinge) */
+.env-flap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: calc(clamp(320px, 55vw, 520px) * 0.38);
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transform: rotateX(0deg);
+  z-index: 10;
+}
+
+/* Flap outer surface */
+.env-flap-front {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: visible;
+}
+.env-flap-front::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: calc(clamp(320px, 55vw, 520px) / 2 + 2px) solid transparent;
+  border-right: calc(clamp(320px, 55vw, 520px) / 2 + 2px) solid transparent;
+  border-top: calc(clamp(320px, 55vw, 520px) * 0.38) solid #ede0cc;
+  filter: drop-shadow(0 4px 8px rgba(120,80,40,0.2));
+}
+/* Flap sheen gradient */
+.env-flap-front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Wax seal */
+.wax-seal {
+  position: absolute;
+  top: calc(clamp(320px, 55vw, 520px) * 0.33);
+  left: 50%;
+  transform: translateX(-50%) translateZ(4px);
+  width: clamp(60px, 12vw, 90px);
+  height: clamp(60px, 12vw, 90px);
+  z-index: 20;
+  filter: drop-shadow(0 6px 16px rgba(100,40,10,0.5));
+  transition: none;
+}
+.wax-seal svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Seal crack animation */
+.seal-crack {
+  opacity: 0;
+  transform-origin: center;
+  transition: opacity 0.3s;
+}
+.seal-cracking .seal-crack { opacity: 1; }
+.seal-cracking circle.wax-main {
+  animation: sealPulse 0.5s ease-in-out;
+}
+@keyframes sealPulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.05); }
+  70%  { transform: scale(0.97); }
+  100% { transform: scale(1); }
+}
+
+/* Invitation card (hidden inside envelope - not used in animation) */
+.inv-card {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%) translateY(20%) translateZ(-2px) scaleY(0.85);
+  width: 80%;
+  height: 82%;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(180,140,120,0.025) 2px, rgba(180,140,120,0.025) 4px),
+    linear-gradient(170deg, #fffdf9 0%, #fdf5ec 50%, #f9ede0 100%);
+  border-radius: 2px;
+  box-shadow:
+    0 8px 30px rgba(100,60,30,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.9),
+    inset 0 -1px 0 rgba(180,130,90,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 2vw, 14px);
+  padding: clamp(16px, 4vw, 32px);
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.inv-arabic {
+  font-family: var(--font-sans);
+  font-size: clamp(10px, 2vw, 13px);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--rg-gold);
+  font-weight: 400;
+}
+
+.inv-names {
+  font-family: var(--font-script);
+  font-size: clamp(38px, 9vw, 68px);
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.inv-amp {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 4vw, 26px);
+  color: var(--text-light);
+  font-style: italic;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.inv-divider {
+  width: 90px;
+  height: 2px;
+  background: var(--grad-gold);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(212,165,116,0.3);
+}
+
+.inv-date-mini {
+  font-family: var(--font-sans);
+  font-size: clamp(9px, 2vw, 12px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  font-weight: 300;
+}
+
+/* Particle canvas */
+#env-particle-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+#env-particle-canvas.active { opacity: 1; }
+
+/* Bloom glow */
+.bloom-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(220,170,130,0.28) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 1.2s ease;
+}
+.bloom-glow.active { opacity: 1; }
+
+/* Envelope sparkles */
+.env-sparkle {
+  position: fixed;
+  font-size: clamp(14px, 2.5vw, 22px);
+  pointer-events: none;
+  z-index: 10002;
+  animation: sparkleFloat 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes sparkleFloat {
+  0% {
+    transform: translate(0, 0) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(0, -30px) scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -60px) scale(0.5) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Open button (hidden) */
+.open-btn {
   display: none;
+}
+
+/* ============================================
+   RIBBON / STRING
+   ============================================ */
+.ribbon-wrap {
+  position: absolute;
+  top: calc(clamp(320px, 55vw, 520px) * 0.3);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(160px, 30vw, 260px);
+  height: clamp(30px, 6vw, 50px);
+  z-index: 15;
+  pointer-events: none;
+  transform-origin: center top;
+}
+.ribbon-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ============================================
+   WAX SEAL
+   ============================================ */
+.wax-seal {
+  position: absolute;
+  top: calc(clamp(320px, 55vw, 520px) * 0.33);
+  left: 50%;
+  transform: translateX(-50%) translateZ(4px);
+  width: clamp(44px, 9vw, 72px);
+  height: clamp(44px, 9vw, 72px);
+  z-index: 20;
+  filter: drop-shadow(0 4px 12px rgba(100,40,10,0.45));
+}
+.wax-seal svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Seal crack lines (appear during break animation) */
+.seal-crack {
+  opacity: 0;
+  transform-origin: center;
+  transition: opacity 0.3s;
+}
+.seal-cracking .seal-crack { 
+  opacity: 1; 
 }
 
 /* ============================================
@@ -1138,8 +1575,10 @@ body {
 
   <div class="envelope-bg-pattern"></div>
 
-  <!-- ENVELOPE -->
-  <div class="envelope-wrapper" id="envelopeWrapper">
+  <!-- 3D Scene with camera zoom -->
+  <div class="scene">
+    <!-- ENVELOPE -->
+    <div class="envelope-wrapper" id="envelopeWrapper">
     <div class="envelope-body" id="envelopeBody">
       <!-- Sides -->
       <div class="env-left"></div>
@@ -1160,33 +1599,76 @@ body {
 
       <!-- Top flap (clickable) -->
       <div class="env-flap" id="envFlap">
-        <!-- Wax seal on the flap -->
-        <div class="wax-seal" id="waxSeal">
-          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="sealGrad" cx="40%" cy="35%" r="60%">
-                <stop offset="0%" stop-color="#d4a574"/>
-                <stop offset="50%" stop-color="#c9896a"/>
-                <stop offset="100%" stop-color="#a0614a"/>
-              </radialGradient>
-            </defs>
-            <!-- Seal base -->
-            <circle cx="40" cy="40" r="36" fill="url(#sealGrad)"/>
-            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,220,180,0.4)" stroke-width="1"/>
-            <circle cx="40" cy="40" r="28" fill="none" stroke="rgba(255,220,180,0.25)" stroke-width="0.5" stroke-dasharray="3,3"/>
-            <!-- Monogram M&A -->
-            <text x="40" y="46" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="rgba(255,255,255,0.9)" letter-spacing="1">A&amp;M</text>
-          </svg>
-        </div>
+        <div class="env-flap-front"></div>
+      </div>
+
+      <!-- Ribbon / bow (decorative SVG over seal) -->
+      <div class="ribbon-wrap" id="ribbonWrap" style="top:0;transform:translateX(-50%) translateY(calc(clamp(320px,55vw,520px)*0.28))">
+        <svg class="ribbon-svg" id="ribbonSvg" viewBox="0 0 260 50" xmlns="http://www.w3.org/2000/svg">
+          <!-- Left ribbon tail -->
+          <path id="rl" d="M130 25 Q80 10 20 18" stroke="#c4906a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <!-- Right ribbon tail -->
+          <path id="rr" d="M130 25 Q180 10 240 18" stroke="#c4906a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <!-- Left loop -->
+          <path id="ll" d="M130 25 Q110 5 90 12 Q105 22 130 25Z" fill="#d4a070" opacity="0.85"/>
+          <!-- Right loop -->
+          <path id="rl2" d="M130 25 Q150 5 170 12 Q155 22 130 25Z" fill="#d4a070" opacity="0.85"/>
+          <!-- Knot center -->
+          <ellipse cx="130" cy="25" rx="8" ry="6" fill="#b87040"/>
+          <ellipse cx="130" cy="25" rx="5" ry="3.5" fill="#d4906a"/>
+        </svg>
+      </div>
+
+      <!-- Wax seal SVG -->
+      <div class="wax-seal" id="waxSeal">
+        <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="waxGrad" cx="40%" cy="35%" r="60%">
+              <stop offset="0%" stop-color="#c23c4a"/>
+              <stop offset="60%" stop-color="#9c2030"/>
+              <stop offset="100%" stop-color="#6e1020"/>
+            </radialGradient>
+            <radialGradient id="waxSheen" cx="35%" cy="30%" r="50%">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.3)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </radialGradient>
+          </defs>
+          <!-- Main wax blob -->
+          <circle class="wax-main" cx="36" cy="36" r="33" fill="url(#waxGrad)"/>
+          <!-- Specular sheen -->
+          <ellipse cx="28" cy="24" rx="12" ry="8" fill="url(#waxSheen)" opacity="0.6"/>
+          <!-- Embossed monogram ring -->
+          <circle cx="36" cy="36" r="25" fill="none" stroke="rgba(255,220,200,0.25)" stroke-width="1.5"/>
+          <circle cx="36" cy="36" r="21" fill="none" stroke="rgba(255,220,200,0.18)" stroke-width="0.8"/>
+          <!-- Embossed letters A&M -->
+          <text x="36" y="32" text-anchor="middle" font-family="Georgia,serif"
+                font-size="8" font-weight="300" letter-spacing="2"
+                fill="rgba(255,220,200,0.55)">A</text>
+          <text x="36" y="42" text-anchor="middle" font-family="Georgia,serif"
+                font-size="6" font-weight="300" letter-spacing="1"
+                fill="rgba(255,220,200,0.4)">&amp;</text>
+          <text x="36" y="51" text-anchor="middle" font-family="Georgia,serif"
+                font-size="8" font-weight="300" letter-spacing="2"
+                fill="rgba(255,220,200,0.55)">M</text>
+          <!-- Decorative star points -->
+          <g fill="rgba(255,220,200,0.2)">
+            <polygon points="36,8 37.5,11 36,13 34.5,11" />
+            <polygon points="36,59 37.5,61 36,63 34.5,61" />
+            <polygon points="9,36 11,37.5 13,36 11,34.5" />
+            <polygon points="59,36 61,37.5 63,36 61,34.5" />
+          </g>
+          <!-- Crack lines (appear during break animation) -->
+          <g class="seal-crack">
+            <line x1="36" y1="36" x2="50" y2="18" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+            <line x1="36" y1="36" x2="20" y2="22" stroke="rgba(255,255,255,0.35)" stroke-width="0.6"/>
+            <line x1="36" y1="36" x2="55" y2="44" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+          </g>
+        </svg>
       </div>
     </div>
-  </div>
+  </div><!-- end envelope-wrapper -->
+  </div><!-- end scene -->
 
-  <!-- Open Button -->
-  <button class="open-btn" id="openBtn">
-    <i class="fas fa-envelope-open"></i>
-    Open Invitation
-  </button>
 </section>
 
 <div class="section-sep" style="background:none;height:0;"></div>
@@ -1515,15 +1997,206 @@ body {
      ========================================== -->
 <script>
 /* ===================================================
-   1. LOADING SCREEN
+   1. LOADING SCREEN & ENVELOPE AUTO-OPEN
    =================================================== */
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('loading-screen').classList.add('hidden');
+    // Start envelope animation automatically
+    setTimeout(() => {
+      startEnvelopeAnimation();
+    }, 300);
     startParticles();
     startFloatingFlowers();
-  }, 1800);
+  }, 1500);
 });
+
+/* ===================================================
+   ENVELOPE AUTO-OPEN ANIMATION (Advanced JS-based)
+   =================================================== */
+
+// Easing functions
+const ease = {
+  outExpo:  t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
+  outQuart: t => 1 - Math.pow(1 - t, 4),
+  inOutCubic: t => t < 0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2,
+};
+
+// Animate utility (JS tween)
+function animate({ duration, easing = t => t, onUpdate, onComplete }) {
+  const start = performance.now();
+  function tick(now) {
+    const elapsed = Math.min((now - start) / duration, 1);
+    const progress = easing(elapsed);
+    onUpdate(progress, elapsed);
+    if (elapsed < 1) requestAnimationFrame(tick);
+    else if (onComplete) onComplete();
+  }
+  requestAnimationFrame(tick);
+}
+
+function startEnvelopeAnimation() {
+  const envSection = document.getElementById('envelope-section');
+  const envFlap = document.getElementById('envFlap');
+  const waxSeal = document.getElementById('waxSeal');
+  const ribbonSvg = document.getElementById('ribbonSvg');
+  const ribbonWrap = document.getElementById('ribbonWrap');
+  const envWrapper = document.getElementById('envelopeWrapper');
+
+  if (!envSection || !envFlap || !waxSeal) return;
+
+  // Step 1: Animate ribbon loosening (400ms delay)
+  setTimeout(() => {
+    animateRibbon(() => {
+      spawnEnvelopeSparkles(envWrapper);
+    });
+  }, 400);
+
+  // Step 2: Break wax seal (1500ms delay)
+  setTimeout(() => {
+    animateSeal(() => {});
+  }, 1500);
+
+  // Step 3: Open flap (2300ms delay)
+  setTimeout(() => {
+    animateFlap(() => {
+      spawnEnvelopeFlowers(envWrapper);
+    });
+  }, 2300);
+
+  // Step 4: Fade out and transition (4500ms delay)
+  setTimeout(() => {
+    envSection.classList.add('hidden');
+    setTimeout(() => {
+      const invSection = document.getElementById('invitation-section');
+      if (invSection) {
+        invSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 600);
+  }, 4500);
+
+  // Ribbon loosening animation
+  function animateRibbon(onDone) {
+    const leftPath  = document.getElementById('rl');
+    const rightPath = document.getElementById('rr');
+    const leftLoop  = document.getElementById('ll');
+    const rightLoop = document.getElementById('rl2');
+
+    if (!leftPath || !rightPath || !leftLoop || !rightLoop) {
+      onDone();
+      return;
+    }
+
+    animate({
+      duration: 1100,
+      easing: ease.inOutCubic,
+      onUpdate(t) {
+        // Tails droop down
+        const yOff = t * 18;
+        leftPath.setAttribute('d',
+          `M130 25 Q${80 - t*10} ${10 + yOff} ${20 - t*5} ${18 + yOff}`);
+        rightPath.setAttribute('d',
+          `M130 25 Q${180 + t*10} ${10 + yOff} ${240 + t*5} ${18 + yOff}`);
+        // Loops shrink
+        const sc = 1 - t * 0.7;
+        leftLoop.setAttribute('opacity', String(0.85 * sc));
+        rightLoop.setAttribute('opacity', String(0.85 * sc));
+      },
+      onComplete() {
+        // Fade out ribbon entirely
+        animate({
+          duration: 400,
+          easing: ease.outQuart,
+          onUpdate(t) {
+            if (ribbonSvg) ribbonSvg.style.opacity = String(1 - t);
+          },
+          onComplete: onDone
+        });
+      }
+    });
+  }
+
+  // Seal break animation
+  function animateSeal(onDone) {
+    waxSeal.classList.add('seal-cracking');
+    animate({
+      duration: 700,
+      easing: ease.outExpo,
+      onUpdate(t) {
+        waxSeal.style.transform =
+          `translateX(-50%) translateZ(4px) rotate(${t * 8}deg) scale(${1 + t * 0.12})`;
+        waxSeal.style.opacity = String(1 - t * 0.9);
+      },
+      onComplete() {
+        waxSeal.style.display = 'none';
+        onDone();
+      }
+    });
+  }
+
+  // Flap open animation
+  function animateFlap(onDone) {
+    animate({
+      duration: 1800,
+      easing: ease.inOutCubic,
+      onUpdate(t) {
+        // Rotate flap from 0 → -185deg (open past flat)
+        const deg = t * -185;
+        envFlap.style.transform = `rotateX(${deg}deg)`;
+        // Slight shadow intensification
+        const shadowAlpha = 0.35 + t * 0.2;
+        envFlap.style.filter = `drop-shadow(0 ${4 + t*12}px ${10 + t*20}px rgba(80,40,10,${shadowAlpha}))`;
+      },
+      onComplete: onDone
+    });
+  }
+}
+
+/* Spawn sparkles around envelope */
+function spawnEnvelopeSparkles(container) {
+  const sparkles = ['✦', '✧', '⋆', '✨', '⋄', '✼', '❈'];
+  const rect = container.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  for (let i = 0; i < 18; i++) {
+    setTimeout(() => {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'env-sparkle';
+      sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+      const angle = (i / 18) * Math.PI * 2;
+      const distance = 70 + Math.random() * 50;
+      sparkle.style.left = (centerX + Math.cos(angle) * distance) + 'px';
+      sparkle.style.top = (centerY + Math.sin(angle) * distance) + 'px';
+      sparkle.style.color = `hsl(${20 + Math.random() * 30}, 75%, ${55 + Math.random() * 20}%)`;
+      sparkle.style.animationDelay = (i * 0.03) + 's';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1200);
+    }, i * 30);
+  }
+}
+
+/* Spawn floating flowers around envelope */
+function spawnEnvelopeFlowers(container) {
+  const flowers = ['🌸', '🌹', '🌺', '🌼', '🌷', '✿', '❀', '🪷'];
+  const rect = container.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  for (let i = 0; i < 16; i++) {
+    setTimeout(() => {
+      const flower = document.createElement('div');
+      flower.className = 'env-flower';
+      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.left = (centerX + (Math.random() - 0.5) * 240) + 'px';
+      flower.style.top = centerY + 'px';
+      flower.style.animationDelay = (i * 0.05) + 's';
+      flower.style.animationDuration = (1.2 + Math.random() * 0.6) + 's';
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 2000);
+    }, i * 45);
+  }
+}
 
 /* ===================================================
    2. CUSTOM CURSOR
@@ -1547,7 +2220,7 @@ function animCursor() {
 }
 animCursor();
 
-document.querySelectorAll('a,button,.gallery-item,.open-btn').forEach(el => {
+document.querySelectorAll('a,button,.gallery-item').forEach(el => {
   el.addEventListener('mouseenter', () => {
     ring.style.width  = '50px';
     ring.style.height = '50px';
