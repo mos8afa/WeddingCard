@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mariem & Ali — Wedding Invitation</title>
+<title>Ali & Mariem — Wedding Invitation</title>
 <link rel="icon" type="image/png" href="{% static 'favicon.png' %}" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -164,317 +164,14 @@ body {
   z-index: 1;
 }
 
-/* ============================================
-   MUSIC BUTTON
-   ============================================ */
-#music-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  background: var(--grad-gold);
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 500;
-  box-shadow: var(--shadow-glow), var(--shadow-soft);
-  transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s;
-  color: white;
-  font-size: 16px;
-}
-#music-btn:hover { transform: scale(1.12); box-shadow: 0 0 50px rgba(212,165,116,0.5), var(--shadow-card); }
-#music-btn.playing { animation: musicPulse 1.8s ease infinite; }
-@keyframes musicPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(212,165,116,0.4); }
-  50%       { box-shadow: 0 0 50px rgba(212,165,116,0.8), 0 0 80px rgba(212,165,116,0.3); }
-}
+
 
 /* ============================================
-   SECTION: ENVELOPE
+   SECTION: ENVELOPE (HIDDEN)
    ============================================ */
 #envelope-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: var(--grad-warm);
-  position: relative;
-  z-index: 2;
-  overflow: hidden;
-  padding: 40px 20px;
+  display: none;
 }
-
-.envelope-bg-pattern {
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(ellipse at 20% 20%, rgba(240,200,168,0.25) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(248,180,200,0.2) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(249,232,224,0.3) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-/* SVG floral corners */
-.floral-corner {
-  position: absolute;
-  width: clamp(80px, 15vw, 160px);
-  opacity: 0.25;
-}
-.floral-corner.tl { top: 20px; left: 20px; }
-.floral-corner.tr { top: 20px; right: 20px; transform: scaleX(-1); }
-.floral-corner.bl { bottom: 20px; left: 20px; transform: scaleY(-1); }
-.floral-corner.br { bottom: 20px; right: 20px; transform: scale(-1); }
-
-.envelope-wrapper {
-  position: relative;
-  width: clamp(280px, 80vw, 520px);
-  perspective: 1200px;
-}
-
-.envelope-body {
-  position: relative;
-  width: 100%;
-  padding-bottom: 65%;
-  background: linear-gradient(160deg, #fdf0e8 0%, #f5e0d0 40%, #edd0b8 100%);
-  border-radius: 4px 4px 8px 8px;
-  box-shadow:
-    var(--shadow-card),
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    0 2px 0 rgba(180,120,80,0.1);
-  overflow: visible;
-}
-
-/* Envelope back flap (bottom V) */
-.env-bottom {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 55%;
-  background: linear-gradient(175deg, #edd0b8 0%, #e8c4a8 100%);
-  clip-path: polygon(0 0, 50% 100%, 100% 0);
-  border-radius: 0 0 8px 8px;
-  z-index: 1;
-}
-
-/* Envelope side flaps */
-.env-left {
-  position: absolute;
-  top: 0; left: 0;
-  width: 52%; height: 100%;
-  background: linear-gradient(135deg, #f0d8c0 0%, #e8c8a8 100%);
-  clip-path: polygon(0 0, 100% 50%, 0 100%);
-  z-index: 1;
-}
-.env-right {
-  position: absolute;
-  top: 0; right: 0;
-  width: 52%; height: 100%;
-  background: linear-gradient(225deg, #f0d8c0 0%, #e8c8a8 100%);
-  clip-path: polygon(100% 0, 0 50%, 100% 100%);
-  z-index: 1;
-}
-
-/* Rose gold border lines */
-.env-border {
-  position: absolute;
-  inset: 6px;
-  border: 1px solid rgba(212,165,116,0.4);
-  border-radius: 2px 2px 6px 6px;
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* Envelope top flap */
-.env-flap {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 55%;
-  background: linear-gradient(170deg, #fdf0e8 0%, #f5dfc8 60%, #edd0b0 100%);
-  clip-path: polygon(0 0, 50% 100%, 100% 0);
-  transform-origin: top center;
-  transform-style: preserve-3d;
-  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 4;
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(160,97,74,0.15);
-}
-.env-flap.open {
-  transform: rotateX(-180deg);
-}
-
-/* Wax seal */
-.wax-seal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(44px, 9vw, 64px);
-  height: clamp(44px, 9vw, 64px);
-  z-index: 5;
-  cursor: pointer;
-  transition: transform 0.5s var(--ease-bounce), opacity 0.5s;
-}
-.wax-seal.hidden { opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(0); }
-
-.wax-seal svg { width: 100%; height: 100%; }
-
-/* Invitation card inside envelope */
-.inv-card {
-  position: absolute;
-  top: 15%;
-  left: 7%;
-  right: 7%;
-  background: linear-gradient(160deg, #fffaf8 0%, #fdf5f0 100%);
-  border-radius: 4px;
-  padding: clamp(16px, 4vw, 32px);
-  text-align: center;
-  box-shadow: 0 -4px 20px rgba(160,97,74,0.12);
-  z-index: 2;
-  transform: translateY(0);
-  opacity: 0;
-  transition: none;
-  border: 1px solid rgba(212,165,116,0.3);
-}
-
-/* Animation stages for card reveal */
-.inv-card.stage-1 {
-  /* Card slides out of envelope */
-  animation: slideOut 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  opacity: 1;
-}
-
-.inv-card.stage-2 {
-  /* Card moves to center and zooms */
-  animation: moveAndZoom 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  opacity: 1;
-}
-
-@keyframes slideOut {
-  0% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(-120%);
-    opacity: 1;
-  }
-}
-
-@keyframes moveAndZoom {
-  0% {
-    position: absolute;
-    top: 15%;
-    left: 7%;
-    right: 7%;
-    transform: translateY(-120%) scale(1);
-    opacity: 1;
-  }
-  50% {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    width: clamp(280px, 80vw, 520px);
-    transform: translate(-50%, -50%) scale(1.1);
-    opacity: 1;
-    z-index: 9000;
-  }
-  100% {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    width: clamp(280px, 80vw, 520px);
-    transform: translate(-50%, -50%) scale(1.8);
-    opacity: 1;
-    z-index: 9000;
-  }
-}
-
-.inv-arabic {
-  font-family: var(--font-serif);
-  font-size: clamp(14px, 3vw, 20px);
-  font-weight: 500;
-  color: var(--rg-core);
-  margin-bottom: 6px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-style: italic;
-}
-.inv-arabic[dir="rtl"] {
-  font-family: var(--font-arabic);
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: none;
-  font-style: normal;
-  direction: rtl;
-}
-.inv-names {
-  font-family: var(--font-script);
-  font-size: clamp(24px, 6vw, 42px);
-  background: var(--grad-gold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1.1;
-}
-.inv-amp {
-  font-family: var(--font-serif);
-  font-size: clamp(12px, 2.5vw, 16px);
-  color: var(--text-light);
-  display: block;
-  margin: 3px 0;
-  font-style: italic;
-}
-.inv-date-mini {
-  font-family: var(--font-sans);
-  font-size: clamp(8px, 1.6vw, 10px);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--text-light);
-  margin-top: 6px;
-}
-.inv-divider {
-  width: 50px; height: 1px;
-  background: var(--grad-gold);
-  margin: 6px auto;
-}
-
-/* Open button */
-.open-btn {
-  margin-top: 32px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 36px;
-  background: transparent;
-  border: 1.5px solid var(--rg-core);
-  border-radius: 40px;
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--rg-deep);
-  cursor: pointer;
-  transition: all 0.4s var(--ease-smooth);
-  position: relative;
-  overflow: hidden;
-}
-.open-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--grad-gold);
-  transform: translateX(-100%);
-  transition: transform 0.4s var(--ease-smooth);
-  z-index: -1;
-}
-.open-btn:hover { color: white; border-color: transparent; box-shadow: var(--shadow-glow); }
-.open-btn:hover::before { transform: translateX(0); }
 
 /* ============================================
    SECTION HEADER SHARED STYLE
@@ -948,98 +645,6 @@ body {
 }
 
 /* ============================================
-   SECTION: MEMORIES / GALLERY
-   ============================================ */
-#memories-section {
-  padding: 100px 20px;
-  background: linear-gradient(160deg, #fdf5f0 0%, #f9ece6 100%);
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  max-width: 1100px;
-  margin: 48px auto 0;
-}
-@media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 500px) { .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
-
-.gallery-item {
-  position: relative;
-  aspect-ratio: 3/4;
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: var(--shadow-soft);
-  border: 2px solid rgba(212,165,116,0.2);
-  opacity: 0;
-  transform: translateY(30px) scale(0.96);
-  transition: opacity 0.6s, transform 0.6s var(--ease-luxury), box-shadow 0.4s;
-}
-.gallery-item.visible { opacity: 1; transform: translateY(0) scale(1); }
-.gallery-item:hover { box-shadow: var(--shadow-card), var(--shadow-glow); }
-
-.gallery-item img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 0.7s var(--ease-luxury);
-}
-.gallery-item:hover img { transform: scale(1.08); }
-
-.gallery-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(160,97,74,0.5) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.4s;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 20px;
-}
-.gallery-item:hover .gallery-overlay { opacity: 1; }
-.gallery-overlay-icon { color: white; font-size: 24px; }
-
-/* Lightbox */
-#lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(30, 12, 6, 0.95);
-  z-index: 8000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s, visibility 0.4s;
-}
-#lightbox.open { opacity: 1; visibility: visible; }
-#lightbox img {
-  max-width: 90vw;
-  max-height: 85vh;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-  border: 1px solid rgba(212,165,116,0.3);
-  transform: scale(0.9);
-  transition: transform 0.4s var(--ease-bounce);
-}
-#lightbox.open img { transform: scale(1); }
-.lightbox-close {
-  position: absolute;
-  top: 24px; right: 28px;
-  color: rgba(255,255,255,0.7);
-  font-size: 28px;
-  cursor: pointer;
-  transition: color 0.3s, transform 0.3s;
-}
-.lightbox-close:hover { color: var(--rg-shine); transform: rotate(90deg); }
-
-/* ============================================
    SECTION: LOVE QUOTE
    ============================================ */
 #quote-section {
@@ -1422,9 +1027,6 @@ body {
   #story-section { padding: 60px 16px; }
   .story-inner { max-width: 100%; }
 
-  #memories-section { padding: 60px 16px; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 32px; }
-
   #quote-section { padding: 70px 16px; }
 
   #details-section { padding: 60px 16px; }
@@ -1444,10 +1046,6 @@ body {
 
 /* --- Small mobile (480px) --- */
 @media (max-width: 480px) {
-  /* Envelope */
-  .envelope-wrapper { width: min(90vw, 340px); }
-  .open-btn { padding: 12px 24px; font-size: 10px; letter-spacing: 3px; }
-
   /* Hero */
   .hero-image-frame { width: min(80vw, 260px); }
   .hero-quote { font-size: 14px; }
@@ -1477,9 +1075,6 @@ body {
 
   /* Footer */
   .footer-note { font-size: 11px; padding: 20px 16px; }
-
-  /* Music button */
-  #music-btn { bottom: 20px; right: 16px; width: 46px; height: 46px; font-size: 14px; }
 }
 </style>
 </head>
@@ -1495,24 +1090,18 @@ body {
 
 <!-- LOADING SCREEN -->
 <div id="loading-screen">
-  <div class="loader-monogram">M & A</div>
+  <div class="loader-monogram">A & M</div>
   <div class="loader-line"></div>
   <div class="loader-text">Loading Your Invitation</div>
 </div>
 
-<!-- MUSIC BUTTON -->
-<button id="music-btn" title="Toggle Music" aria-label="Toggle background music">
-  <i class="fas fa-music"></i>
-</button>
-
 <!-- PARTICLES CANVAS -->
 <canvas id="particles-canvas"></canvas>
 
-<!-- LIGHTBOX -->
+{% comment %} <!-- LIGHTBOX -->
 <div id="lightbox" role="dialog" aria-modal="true">
   <span class="lightbox-close" id="lightbox-close"><i class="fas fa-times"></i></span>
-  <img id="lightbox-img" src="" alt="Gallery photo" />
-</div>
+</div> {% endcomment %}
 
 <!-- ==========================================
      SECTION 1: ENVELOPE
@@ -1564,7 +1153,7 @@ body {
       <div class="inv-card" id="invCard">
         <div class="inv-arabic">Wedding Invitation</div>
         <div class="inv-divider"></div>
-        <div class="inv-names">Mariem<span class="inv-amp">&amp;</span>Ali</div>
+        <div class="inv-names">Ali<span class="inv-amp">&amp;</span>Mariem</div>
         <div class="inv-divider"></div>
         <div class="inv-date-mini">26 · June · 2026 &nbsp;|&nbsp; 5:00 PM</div>
       </div>
@@ -1586,7 +1175,7 @@ body {
             <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,220,180,0.4)" stroke-width="1"/>
             <circle cx="40" cy="40" r="28" fill="none" stroke="rgba(255,220,180,0.25)" stroke-width="0.5" stroke-dasharray="3,3"/>
             <!-- Monogram M&A -->
-            <text x="40" y="46" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="rgba(255,255,255,0.9)" letter-spacing="1">M&amp;A</text>
+            <text x="40" y="46" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="rgba(255,255,255,0.9)" letter-spacing="1">A&amp;M</text>
           </svg>
         </div>
       </div>
@@ -1636,7 +1225,7 @@ body {
       <path d="M0,20 Q22,2 45,20 Q67,38 90,20 Q112,2 135,20 Q157,38 180,20" stroke="#d4a574" stroke-width="1" fill="none"/>
     </svg>
 
-    <div class="inv-full-names">Mariem<span class="inv-full-amp">&amp;</span>Ali</div>
+    <div class="inv-full-names">Ali<span class="inv-full-amp">&amp;</span>Mariem</div>
 
     <div class="ornament">
       <div class="ornament-line"></div>
@@ -1681,14 +1270,14 @@ body {
   <div class="hero-layout">
     <div class="hero-image-frame reveal-left">
       <!-- Replace the src with your couple photo -->
-      <img src="{% static 'img/hero.jpeg' %}" alt="Mariem & Ali" />
+      <img src="{% static 'img/hero.jpeg' %}" alt="Ali & Mariem" />
       <div class="hero-ring"></div>
       <div class="hero-ring-2"></div>
     </div>
 
     <div class="hero-content reveal-right">
       <span class="section-tag">Our Love Story</span>
-      <div class="hero-names">Mariem<br>&amp;<br>Ali</div>
+      <div class="hero-names">Ali<br>&amp;<br>Mariem</div>
       <div class="ornament" style="justify-content:center;">
         <div class="ornament-line"></div>
         <i class="fas fa-heart" style="font-size:10px;color:#e8b4a0;"></i>
@@ -1716,7 +1305,7 @@ body {
 
   <div class="countdown-grid reveal">
     <div class="countdown-card">
-      <span class="countdown-num" id="cd-days">000</span>
+      <span class="countdown-num" id="cd-days">00</span>
       <div class="countdown-label">Days</div>
     </div>
     <div class="countdown-colon">:</div>
@@ -1802,39 +1391,6 @@ body {
 <div class="section-sep"></div>
 
 <!-- ==========================================
-     SECTION 6: MEMORIES / GALLERY
-     ========================================== -->
-<section id="memories-section">
-  <span class="section-tag reveal">Beautiful Moments</span>
-  <h2 class="section-title reveal">Memories</h2>
-
-  <div class="gallery-grid" id="galleryGrid">
-    <!--
-      Replace these Unsplash URLs with actual couple photos.
-      Format: https://images.unsplash.com/photo-PHOTO_ID?w=600&q=80
-    -->
-    <div class="gallery-item" data-src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80">
-      <img src="{% static 'img/wedding.jpeg' %}" alt="Mariem & Ali" />
-      <div class="gallery-overlay"><i class="fas fa-expand gallery-overlay-icon"></i></div>
-    </div>
-    <div class="gallery-item" data-src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80">
-      <img src="{% static 'img/couple.jpeg' %}" alt="Mariem & Ali" />
-      <div class="gallery-overlay"><i class="fas fa-expand gallery-overlay-icon"></i></div>
-    </div>
-    <div class="gallery-item" data-src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&q=80">
-      <img src="{% static 'img/selfi.jpeg' %}" alt="Mariem & Ali" />
-      <div class="gallery-overlay"><i class="fas fa-expand gallery-overlay-icon"></i></div>
-    </div>
-    <div class="gallery-item" data-src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=600&q=80">
-      <img src="{% static 'img/couple2.jpeg' %}" alt="Mariem & Ali" />
-      <div class="gallery-overlay"><i class="fas fa-expand gallery-overlay-icon"></i></div>
-    </div>
-  </div>
-</section>
-
-<div class="section-sep"></div>
-
-<!-- ==========================================
      SECTION 7: LOVE QUOTE
      ========================================== -->
 <section id="quote-section">
@@ -1847,7 +1403,7 @@ body {
     <p class="quote-text reveal">
       Every love story is beautiful,<br>but ours is our favorite.
     </p>
-    <p class="quote-attr reveal">— Mariem &amp; Ali</p>
+    <p class="quote-attr reveal">— Ali &amp; Mariem</p>
   </div>
 </section>
 
@@ -1944,21 +1500,15 @@ body {
     <p class="ty-body">
       We cannot wait to celebrate<br>this magical day with you.
     </p>
-    <div class="ty-names">Mariem &amp; Ali</div>
+    <div class="ty-names">Ali &amp; Mariem</div>
     <div style="font-family:var(--font-sans);font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--rg-deep);margin-top:20px;opacity:0.6;">26 · June · 2026</div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <div class="footer-note">
-  Made with <i class="fas fa-heart" style="color:var(--rg-core);"></i> for Mariem &amp; Ali's Special Day
+  Made with <i class="fas fa-heart" style="color:var(--rg-core);"></i> for Ali &amp; Mariem's Special Day
 </div>
-
-<!-- BACKGROUND MUSIC — Local static file -->
-<audio id="bg-music" loop preload="auto">
-  <source src="{% static 'music/leberch-piano-516448.mp3' %}" type="audio/mpeg" />
-</audio>
-
 
 <!-- ==========================================
      JAVASCRIPT
@@ -2022,84 +1572,7 @@ window.addEventListener('scroll', () => {
 });
 
 /* ===================================================
-   4. ENVELOPE ANIMATION
-   =================================================== */
-const envFlap = document.getElementById('envFlap');
-const waxSeal = document.getElementById('waxSeal');
-const invCard = document.getElementById('invCard');
-const openBtn = document.getElementById('openBtn');
-let envelopeOpened = false;
-
-function openEnvelope() {
-  if (envelopeOpened) return;
-  envelopeOpened = true;
-
-  // Start music when envelope opens
-  if (!musicPlaying) {
-    music.play().then(() => {
-      musicPlaying = true;
-      musicBtn.classList.add('playing');
-      musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    }).catch(() => {
-      // If autoplay is blocked, music will play on next user interaction
-    });
-  }
-
-  // Hide seal
-  waxSeal.classList.add('hidden');
-
-  // Open flap
-  setTimeout(() => envFlap.classList.add('open'), 200);
-
-  // Stage 1: Slide card out of envelope
-  setTimeout(() => {
-    invCard.classList.add('stage-1');
-    spawnSparklesAround(
-      document.getElementById('envelopeWrapper').getBoundingClientRect().left + 
-      document.getElementById('envelopeWrapper').offsetWidth / 2,
-      document.getElementById('envelopeWrapper').getBoundingClientRect().top + 
-      document.getElementById('envelopeWrapper').offsetHeight / 2
-    );
-  }, 900);
-
-  // Stage 2: Move to center and zoom in
-  setTimeout(() => {
-    invCard.classList.remove('stage-1');
-    invCard.classList.add('stage-2');
-  }, 2200);
-
-  // Fade out envelope section and scroll to invitation
-  setTimeout(() => {
-    const envelopeSection = document.getElementById('envelope-section');
-    envelopeSection.style.transition = 'opacity 0.8s ease';
-    envelopeSection.style.opacity = '0';
-    
-    // Hide the card after zoom
-    invCard.style.transition = 'opacity 0.6s ease';
-    invCard.style.opacity = '0';
-  }, 3800);
-
-  // Scroll to invitation section
-  setTimeout(() => {
-    document.getElementById('invitation-section').scrollIntoView({ behavior: 'smooth' });
-    
-    // Hide envelope section completely after scroll
-    setTimeout(() => {
-      document.getElementById('envelope-section').style.display = 'none';
-    }, 800);
-  }, 4500);
-
-  // Hide open button
-  openBtn.style.opacity = '0';
-  openBtn.style.pointerEvents = 'none';
-}
-
-openBtn.addEventListener('click', openEnvelope);
-waxSeal.addEventListener('click', openEnvelope);
-envFlap.addEventListener('click', openEnvelope);
-
-/* ===================================================
-   5. SPARKLES
+   4. SPARKLES
    =================================================== */
 function spawnSparkle(x, y) {
   const s = document.createElement('div');
@@ -2134,7 +1607,7 @@ window.addEventListener('scroll', () => {
 });
 
 /* ===================================================
-   6. PARTICLES CANVAS
+   5. PARTICLES CANVAS
    =================================================== */
 function startParticles() {
   const canvas = document.getElementById('particles-canvas');
@@ -2217,7 +1690,7 @@ function startParticles() {
 }
 
 /* ===================================================
-   7. FLOATING FLOWERS IN HERO
+   6. FLOATING FLOWERS IN HERO
    =================================================== */
 function startFloatingFlowers() {
   const hero   = document.getElementById('hero-section');
@@ -2236,7 +1709,7 @@ function startFloatingFlowers() {
 }
 
 /* ===================================================
-   8. COUNTDOWN TIMER
+   7. COUNTDOWN TIMER
    =================================================== */
 // WEDDING DATE — Change this to the actual wedding date/time
 const WEDDING = new Date('2026-06-26T17:00:00');
@@ -2266,7 +1739,7 @@ function tickCountdown() {
   const h = Math.floor((diff % 86400000) / 3600000);
   const m = Math.floor((diff % 3600000)  / 60000);
   const s = Math.floor((diff % 60000)    / 1000);
-  updatePrev(cdDays,  pad(d, 3));
+  updatePrev(cdDays,  pad(d));
   updatePrev(cdHours, pad(h));
   updatePrev(cdMins,  pad(m));
   updatePrev(cdSecs,  pad(s));
@@ -2275,7 +1748,7 @@ tickCountdown();
 setInterval(tickCountdown, 1000);
 
 /* ===================================================
-   9. SCROLL REVEAL (IntersectionObserver)
+   8. SCROLL REVEAL (IntersectionObserver)
    =================================================== */
 const revealEls = document.querySelectorAll(
   '.reveal, .reveal-left, .reveal-right, .timeline-item, .gallery-item, .detail-card'
@@ -2299,7 +1772,7 @@ const observer = new IntersectionObserver((entries) => {
 revealEls.forEach(el => observer.observe(el));
 
 /* ===================================================
-   10. GALLERY LIGHTBOX
+   9. GALLERY LIGHTBOX
    =================================================== */
 const lightbox   = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
@@ -2323,43 +1796,7 @@ lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightb
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 /* ===================================================
-   11. MUSIC BUTTON
-   =================================================== */
-const music = document.getElementById('bg-music');
-const musicBtn = document.getElementById('music-btn');
-let musicPlaying = false;
-
-// Try autoplay
-music.volume = 0.35;
-const tryAutoplay = () => {
-  music.play().then(() => {
-    musicPlaying = true;
-    musicBtn.classList.add('playing');
-    musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-  }).catch(() => {});
-};
-
-// Try after first interaction
-document.addEventListener('click', () => { if (!musicPlaying) tryAutoplay(); }, { once: true });
-
-musicBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  if (musicPlaying) {
-    music.pause();
-    musicPlaying = false;
-    musicBtn.classList.remove('playing');
-    musicBtn.innerHTML = '<i class="fas fa-music"></i>';
-  } else {
-    music.play().then(() => {
-      musicPlaying = true;
-      musicBtn.classList.add('playing');
-      musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    });
-  }
-});
-
-/* ===================================================
-   12. PARALLAX ON HERO IMAGE
+   10. PARALLAX ON HERO IMAGE
    =================================================== */
 window.addEventListener('scroll', () => {
   const heroImg = document.querySelector('.hero-image-frame img');
