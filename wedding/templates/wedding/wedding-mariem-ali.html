@@ -235,12 +235,12 @@ body {
   pointer-events: none;
 }
 
-/* Scene wrapper (cinematic camera) */
+/* Scene wrapper (cinematic camera) - FASTER */
 .scene {
   perspective: 1200px;
   perspective-origin: 50% 40%;
-  transform: scale(0.78);
-  animation: cameraZoom 1.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.4s forwards;
+  transform: scale(0.85);
+  animation: cameraZoom 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s forwards;
 }
 @keyframes cameraZoom {
   to { transform: scale(1); }
@@ -267,15 +267,15 @@ body {
   inset: 0;
   border-radius: 3px;
   background:
-    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(180,140,110,0.03) 2px, rgba(180,140,110,0.03) 4px),
-    linear-gradient(155deg, #fdfaf6 0%, #f7ede0 30%, #f0ddc8 60%, #e8d0b8 100%);
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(201,137,106,0.04) 2px, rgba(201,137,106,0.04) 4px),
+    linear-gradient(155deg, #fffaf8 0%, #fce8f0 30%, #f5d5c8 60%, #e8b4a0 100%);
   box-shadow:
-    0 40px 80px -10px rgba(100, 60, 30, 0.35),
-    0 20px 40px -8px rgba(120, 70, 40, 0.25),
-    inset 0 1px 0 rgba(220,185,155,0.8),
-    inset 0 -1px 0 rgba(160,110,70,0.3),
-    inset -1px 0 0 rgba(160,110,70,0.2),
-    inset 1px 0 0 rgba(230,200,165,0.6);
+    0 40px 80px -10px rgba(160, 97, 74, 0.35),
+    0 20px 40px -8px rgba(201, 137, 106, 0.25),
+    inset 0 1px 0 rgba(240,200,168,0.8),
+    inset 0 -1px 0 rgba(201,137,106,0.3),
+    inset -1px 0 0 rgba(201,137,106,0.2),
+    inset 1px 0 0 rgba(245,213,200,0.6);
   transform-style: preserve-3d;
   transform: translateZ(0px);
 }
@@ -286,8 +286,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, transparent 48%, rgba(160,110,80,0.06) 49%, rgba(160,110,80,0.06) 50%, transparent 51%),
-    linear-gradient(45deg, transparent 48%, rgba(160,110,80,0.05) 49%, rgba(160,110,80,0.05) 50%, transparent 51%);
+    linear-gradient(135deg, transparent 48%, rgba(201,137,106,0.08) 49%, rgba(201,137,106,0.08) 50%, transparent 51%),
+    linear-gradient(45deg, transparent 48%, rgba(201,137,106,0.06) 49%, rgba(201,137,106,0.06) 50%, transparent 51%);
   border-radius: 3px;
 }
 
@@ -296,7 +296,7 @@ body {
   position: absolute;
   inset: 6px;
   border: 1.5px solid;
-  border-color: rgba(198,154,102,0.5) rgba(178,130,80,0.35) rgba(178,130,80,0.4) rgba(198,154,102,0.5);
+  border-color: rgba(212,165,116,0.6) rgba(201,137,106,0.4) rgba(201,137,106,0.45) rgba(212,165,116,0.6);
   border-radius: 2px;
   pointer-events: none;
 }
@@ -304,7 +304,7 @@ body {
   content: '';
   position: absolute;
   inset: 3px;
-  border: 0.5px solid rgba(198,154,102,0.25);
+  border: 0.5px solid rgba(212,165,116,0.3);
   border-radius: 1px;
 }
 
@@ -326,8 +326,8 @@ body {
   height: 0;
   border-left: calc(clamp(320px, 55vw, 520px) / 2 + 2px) solid transparent;
   border-right: calc(clamp(320px, 55vw, 520px) / 2 + 2px) solid transparent;
-  border-bottom: calc(clamp(320px, 55vw, 520px) * 0.35) solid rgba(224,188,148,0.9);
-  filter: drop-shadow(0 -2px 4px rgba(140,90,50,0.15));
+  border-bottom: calc(clamp(320px, 55vw, 520px) * 0.35) solid rgba(232,180,160,0.9);
+  filter: drop-shadow(0 -2px 4px rgba(201,137,106,0.15));
 }
 
 /* Side triangle folds */
@@ -348,7 +348,7 @@ body {
   width: 0; height: 0;
   border-top: calc(clamp(320px, 55vw, 520px) * 0.31 + 4px) solid transparent;
   border-bottom: calc(clamp(320px, 55vw, 520px) * 0.31 + 4px) solid transparent;
-  border-left: calc(clamp(320px, 55vw, 520px) * 0.5) solid rgba(218,182,140,0.85);
+  border-left: calc(clamp(320px, 55vw, 520px) * 0.5) solid rgba(240,200,185,0.85);
 }
 .env-right::before {
   content: '';
@@ -358,7 +358,7 @@ body {
   width: 0; height: 0;
   border-top: calc(clamp(320px, 55vw, 520px) * 0.31 + 4px) solid transparent;
   border-bottom: calc(clamp(320px, 55vw, 520px) * 0.31 + 4px) solid transparent;
-  border-right: calc(clamp(320px, 55vw, 520px) * 0.5) solid rgba(218,182,140,0.85);
+  border-right: calc(clamp(320px, 55vw, 520px) * 0.5) solid rgba(240,200,185,0.85);
 }
 
 /* Top flap (3D hinge) */
@@ -388,15 +388,15 @@ body {
   width: 0; height: 0;
   border-left: calc(clamp(320px, 55vw, 520px) / 2 + 2px) solid transparent;
   border-right: calc(clamp(320px, 55vw, 520px) / 2 + 2px) solid transparent;
-  border-top: calc(clamp(320px, 55vw, 520px) * 0.38) solid #ede0cc;
-  filter: drop-shadow(0 4px 8px rgba(120,80,40,0.2));
+  border-top: calc(clamp(320px, 55vw, 520px) * 0.38) solid #f5d5c8;
+  filter: drop-shadow(0 4px 8px rgba(201,137,106,0.2));
 }
 /* Flap sheen gradient */
 .env-flap-front::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -1606,16 +1606,16 @@ body {
       <div class="ribbon-wrap" id="ribbonWrap" style="top:0;transform:translateX(-50%) translateY(calc(clamp(320px,55vw,520px)*0.28))">
         <svg class="ribbon-svg" id="ribbonSvg" viewBox="0 0 260 50" xmlns="http://www.w3.org/2000/svg">
           <!-- Left ribbon tail -->
-          <path id="rl" d="M130 25 Q80 10 20 18" stroke="#c4906a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path id="rl" d="M130 25 Q80 10 20 18" stroke="#d4a574" stroke-width="2.2" fill="none" stroke-linecap="round"/>
           <!-- Right ribbon tail -->
-          <path id="rr" d="M130 25 Q180 10 240 18" stroke="#c4906a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path id="rr" d="M130 25 Q180 10 240 18" stroke="#d4a574" stroke-width="2.2" fill="none" stroke-linecap="round"/>
           <!-- Left loop -->
-          <path id="ll" d="M130 25 Q110 5 90 12 Q105 22 130 25Z" fill="#d4a070" opacity="0.85"/>
+          <path id="ll" d="M130 25 Q110 5 90 12 Q105 22 130 25Z" fill="#e8b4a0" opacity="0.85"/>
           <!-- Right loop -->
-          <path id="rl2" d="M130 25 Q150 5 170 12 Q155 22 130 25Z" fill="#d4a070" opacity="0.85"/>
+          <path id="rl2" d="M130 25 Q150 5 170 12 Q155 22 130 25Z" fill="#e8b4a0" opacity="0.85"/>
           <!-- Knot center -->
-          <ellipse cx="130" cy="25" rx="8" ry="6" fill="#b87040"/>
-          <ellipse cx="130" cy="25" rx="5" ry="3.5" fill="#d4906a"/>
+          <ellipse cx="130" cy="25" rx="8" ry="6" fill="#c9896a"/>
+          <ellipse cx="130" cy="25" rx="5" ry="3.5" fill="#d4a574"/>
         </svg>
       </div>
 
@@ -1624,34 +1624,34 @@ body {
         <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="waxGrad" cx="40%" cy="35%" r="60%">
-              <stop offset="0%" stop-color="#c23c4a"/>
-              <stop offset="60%" stop-color="#9c2030"/>
-              <stop offset="100%" stop-color="#6e1020"/>
+              <stop offset="0%" stop-color="#d4a574"/>
+              <stop offset="60%" stop-color="#c9896a"/>
+              <stop offset="100%" stop-color="#a0614a"/>
             </radialGradient>
             <radialGradient id="waxSheen" cx="35%" cy="30%" r="50%">
-              <stop offset="0%" stop-color="rgba(255,255,255,0.3)"/>
+              <stop offset="0%" stop-color="rgba(255,255,255,0.4)"/>
               <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
             </radialGradient>
           </defs>
           <!-- Main wax blob -->
           <circle class="wax-main" cx="36" cy="36" r="33" fill="url(#waxGrad)"/>
           <!-- Specular sheen -->
-          <ellipse cx="28" cy="24" rx="12" ry="8" fill="url(#waxSheen)" opacity="0.6"/>
+          <ellipse cx="28" cy="24" rx="12" ry="8" fill="url(#waxSheen)" opacity="0.7"/>
           <!-- Embossed monogram ring -->
-          <circle cx="36" cy="36" r="25" fill="none" stroke="rgba(255,220,200,0.25)" stroke-width="1.5"/>
-          <circle cx="36" cy="36" r="21" fill="none" stroke="rgba(255,220,200,0.18)" stroke-width="0.8"/>
+          <circle cx="36" cy="36" r="25" fill="none" stroke="rgba(255,240,220,0.3)" stroke-width="1.5"/>
+          <circle cx="36" cy="36" r="21" fill="none" stroke="rgba(255,240,220,0.2)" stroke-width="0.8"/>
           <!-- Embossed letters A&M -->
           <text x="36" y="32" text-anchor="middle" font-family="Georgia,serif"
                 font-size="8" font-weight="300" letter-spacing="2"
-                fill="rgba(255,220,200,0.55)">A</text>
+                fill="rgba(255,240,220,0.7)">A</text>
           <text x="36" y="42" text-anchor="middle" font-family="Georgia,serif"
                 font-size="6" font-weight="300" letter-spacing="1"
-                fill="rgba(255,220,200,0.4)">&amp;</text>
+                fill="rgba(255,240,220,0.5)">&amp;</text>
           <text x="36" y="51" text-anchor="middle" font-family="Georgia,serif"
                 font-size="8" font-weight="300" letter-spacing="2"
-                fill="rgba(255,220,200,0.55)">M</text>
+                fill="rgba(255,240,220,0.7)">M</text>
           <!-- Decorative star points -->
-          <g fill="rgba(255,220,200,0.2)">
+          <g fill="rgba(255,240,220,0.25)">
             <polygon points="36,8 37.5,11 36,13 34.5,11" />
             <polygon points="36,59 37.5,61 36,63 34.5,61" />
             <polygon points="9,36 11,37.5 13,36 11,34.5" />
@@ -1659,9 +1659,9 @@ body {
           </g>
           <!-- Crack lines (appear during break animation) -->
           <g class="seal-crack">
-            <line x1="36" y1="36" x2="50" y2="18" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
-            <line x1="36" y1="36" x2="20" y2="22" stroke="rgba(255,255,255,0.35)" stroke-width="0.6"/>
-            <line x1="36" y1="36" x2="55" y2="44" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+            <line x1="36" y1="36" x2="50" y2="18" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
+            <line x1="36" y1="36" x2="20" y2="22" stroke="rgba(255,255,255,0.4)" stroke-width="0.6"/>
+            <line x1="36" y1="36" x2="55" y2="44" stroke="rgba(255,255,255,0.35)" stroke-width="0.5"/>
           </g>
         </svg>
       </div>
@@ -2045,26 +2045,26 @@ function startEnvelopeAnimation() {
 
   if (!envSection || !envFlap || !waxSeal) return;
 
-  // Step 1: Animate ribbon loosening (400ms delay)
+  // Step 1: Animate ribbon loosening (200ms delay - FASTER)
   setTimeout(() => {
     animateRibbon(() => {
       spawnEnvelopeSparkles(envWrapper);
     });
-  }, 400);
+  }, 200);
 
-  // Step 2: Break wax seal (1500ms delay)
+  // Step 2: Break wax seal (900ms delay - FASTER)
   setTimeout(() => {
     animateSeal(() => {});
-  }, 1500);
+  }, 900);
 
-  // Step 3: Open flap (2300ms delay)
+  // Step 3: Open flap (1400ms delay - FASTER)
   setTimeout(() => {
     animateFlap(() => {
       spawnEnvelopeFlowers(envWrapper);
     });
-  }, 2300);
+  }, 1400);
 
-  // Step 4: Fade out and transition (4500ms delay)
+  // Step 4: Fade out and transition (2800ms delay - FASTER)
   setTimeout(() => {
     envSection.classList.add('hidden');
     setTimeout(() => {
@@ -2072,10 +2072,10 @@ function startEnvelopeAnimation() {
       if (invSection) {
         invSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 600);
-  }, 4500);
+    }, 400);
+  }, 2800);
 
-  // Ribbon loosening animation
+  // Ribbon loosening animation - FASTER
   function animateRibbon(onDone) {
     const leftPath  = document.getElementById('rl');
     const rightPath = document.getElementById('rr');
@@ -2088,7 +2088,7 @@ function startEnvelopeAnimation() {
     }
 
     animate({
-      duration: 1100,
+      duration: 700,
       easing: ease.inOutCubic,
       onUpdate(t) {
         // Tails droop down
@@ -2105,7 +2105,7 @@ function startEnvelopeAnimation() {
       onComplete() {
         // Fade out ribbon entirely
         animate({
-          duration: 400,
+          duration: 300,
           easing: ease.outQuart,
           onUpdate(t) {
             if (ribbonSvg) ribbonSvg.style.opacity = String(1 - t);
@@ -2116,11 +2116,11 @@ function startEnvelopeAnimation() {
     });
   }
 
-  // Seal break animation
+  // Seal break animation - FASTER
   function animateSeal(onDone) {
     waxSeal.classList.add('seal-cracking');
     animate({
-      duration: 700,
+      duration: 500,
       easing: ease.outExpo,
       onUpdate(t) {
         waxSeal.style.transform =
@@ -2134,10 +2134,10 @@ function startEnvelopeAnimation() {
     });
   }
 
-  // Flap open animation
+  // Flap open animation - FASTER
   function animateFlap(onDone) {
     animate({
-      duration: 1800,
+      duration: 1200,
       easing: ease.inOutCubic,
       onUpdate(t) {
         // Rotate flap from 0 → -185deg (open past flat)
@@ -2145,7 +2145,7 @@ function startEnvelopeAnimation() {
         envFlap.style.transform = `rotateX(${deg}deg)`;
         // Slight shadow intensification
         const shadowAlpha = 0.35 + t * 0.2;
-        envFlap.style.filter = `drop-shadow(0 ${4 + t*12}px ${10 + t*20}px rgba(80,40,10,${shadowAlpha}))`;
+        envFlap.style.filter = `drop-shadow(0 ${4 + t*12}px ${10 + t*20}px rgba(201,137,106,${shadowAlpha}))`;
       },
       onComplete: onDone
     });
